@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         //dodati proveru dozvola
         //da li ce biti u redu prikaz za tablet?
         //proveriti gde su stare baze
+        //asfsdfasdsdf
 
 
     }
