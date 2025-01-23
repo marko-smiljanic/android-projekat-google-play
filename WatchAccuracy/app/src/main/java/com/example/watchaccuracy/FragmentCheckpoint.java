@@ -151,6 +151,7 @@ public class FragmentCheckpoint extends Fragment {
                         Checkpoint poslednji;
                         if(!lista.isEmpty()){     //ako lista nije prazna
                             poslednji = lista.get(lista.size() - 1);
+
                             if(poslednji.getUkupnoODstupanje() == null){      //ako poslednji nema konacno odstupanje, onda mu setujemo prvo vreme sistemsko i prvo vreme na satu i guramo u bazu, ostalo na null
                                 int prvoOdstupanjeInt = Integer.parseInt(poslednji.getPrvoOdstupanje());
                                 int drugoOdstupanje = Integer.parseInt(rezultatUSekundamaStr);
@@ -171,9 +172,11 @@ public class FragmentCheckpoint extends Fragment {
                                 int sekundi_u_24h = 24 * 60 * 60; // 24 sata u sekundama
 
                                 //konacno odstupanje (odstupanje koje je bilo izmedju dva check-a) * sekundi u 24h / vreme koje je proteklo izmedju 2 check-a
+                                //imam odstupanje za neki period i onda racunam koliko bi to odsupanje bilo na 24h?
                                 long odstupanje_na_24h = ukupno * sekundi_u_24h / razlika_u_sekundama;
-                                //////////////
 
+
+                                //upis svega u bazu
                                 bazaCheckpoint.editCheckpoint(poslednji.getCheckpointId(), poslednji.getPrvoVremeSistemsko(), poslednji.getPrvoVremeNaSatu(),
                                         poslednji.getPrvoOdstupanje(), dateFormat.format(sistemskoVreme), dateFormat.format(vremeNaSatu),
                                         rezultatUSekundamaStr, String.valueOf(ukupno), String.valueOf(odstupanje_na_24h), sat.getId());  //opis se ne setuje ovde
